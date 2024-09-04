@@ -40,4 +40,12 @@ extension Date {
         dateFormatter.dateFormat = "MMMM yyyy"
         return dateFormatter.string(from: self)
     }
+    
+    init?(firebaseString: String) {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "MMMM d, yyyy 'at' h:mm:ss a z"
+        dateFormatter.locale = Locale(identifier: "en_US_POSIX")
+        guard let date = dateFormatter.date(from: firebaseString) else { return nil }
+        self = date
+    }
 }

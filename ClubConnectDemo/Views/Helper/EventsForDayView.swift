@@ -30,6 +30,9 @@ struct EventsForDayView: View {
     }
 }
 
-//#Preview {
-//    EventsForDayView()
-//}
+#Preview {
+    EventsForDayView(
+        date: Date(firebaseString: "September 3, 2024 at 5:00:00 PM UTC-4") ?? Date(),
+        events: [Event.example1, Event.example2]
+    )
+}

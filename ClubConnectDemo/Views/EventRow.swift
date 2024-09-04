@@ -33,6 +33,7 @@ struct EventRow: View {
     }
 }
 
-//#Preview {
-//    EventRow()
-//}
+#Preview {
+    EventRow(event: Event.example1)
+        .padding()
+}

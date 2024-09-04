@@ -15,6 +15,10 @@ struct MonthView: View {
     
     private var calendar = Calendar.current
     
+    private var defaultAnimation: Animation {
+        .spring(response: 0.5, dampingFraction: 0.8)
+    }
+    
     init(date: Binding<Date>) {
         _date = date
     }
@@ -32,9 +36,11 @@ struct MonthView: View {
             
             calendarGrid
                 .padding(.horizontal)
+                .animation(defaultAnimation, value: date)
             
             if let selectedDate {
                 EventsForDayView(date: selectedDate, events: eventsForDate(selectedDate))
+                    .animation(defaultAnimation, value: selectedDate)
             } else {
                 Spacer()
             }
@@ -46,7 +52,9 @@ struct MonthView: View {
         HStack(alignment: .center) {
             Button(action: {
                 guard let new = calendar.date(byAdding: .month, value: -1, to: date) else { return }
-                date = new
+                withAnimation(defaultAnimation) {
+                    date = new
+                }
                 Task {
                     await fetchEvents()
                 }
@@ -61,7 +69,9 @@ struct MonthView: View {
             Spacer()
             Button(action: {
                 guard let new = calendar.date(byAdding: .month, value: 1, to: date) else { return }
-                date = new
+                withAnimation(defaultAnimation) {
+                    date = new
+                }
                 Task {
                     await fetchEvents()
                 }
@@ -99,7 +109,9 @@ struct MonthView: View {
     private func dayNumberView(_ date: Date) -> some View {
         if eventsForDate(date).count > 0 {
             Button(action: {
-                selectedDate = date
+                withAnimation(defaultAnimation) {
+                    selectedDate = date
+                }
             }, label: {
                 Text("\(calendar.component(.day, from: date))")
                     .foregroundStyle(.red)

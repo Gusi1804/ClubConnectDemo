@@ -66,11 +66,5 @@ struct EventDetail: View {
 }
 
 #Preview {
-    EventDetail(Event(
-        name: "Hello",
-        description: "This is a sample event for previews.",
-        locationDescription: "CCB 102",
-        startTimestamp: Timestamp(date: Date()),
-        endTimestamp: Timestamp(date: Date().addingTimeInterval(3600)))
-    )
+    EventDetail(Event.example1)
 }
