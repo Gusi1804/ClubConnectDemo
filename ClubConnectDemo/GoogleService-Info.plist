@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>API_KEY</key>
+	<string>AIzaSyAHwhKKbgWwWl70jkyh4CwfixqGDwZR8G4</string>
+	<key>GCM_SENDER_ID</key>
+	<string>349417809074</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>club.gtios.ClubConnectDemo</string>
+	<key>PROJECT_ID</key>
+	<string>clubconnect-demo</string>
+	<key>STORAGE_BUCKET</key>
+	<string>clubconnect-demo.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:349417809074:ios:f9f87fbaaf0fb9b380d5ab</string>
+</dict>
+</plist>

@@ -8,17 +8,15 @@
 import SwiftUI
 
 struct ContentView: View {
+    @State private var date = Date()
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+        NavigationStack {
+            MonthView(date: $date)
         }
-        .padding()
     }
 }
 
 #Preview {
     ContentView()
+        .environment(CalendarViewModel())
 }
