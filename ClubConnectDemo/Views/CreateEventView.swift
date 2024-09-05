@@ -9,7 +9,7 @@ import SwiftUI
 
 struct CreateEventView: View {
     @Environment(\.dismiss) var dismiss
-    @Environment(CalendarViewModel.self) private var calendarVM
+    @EnvironmentObject private var calendarVM: CalendarViewModel
 
     @Binding var event: Event
     @State private var startDate: Date = Date()
@@ -47,15 +47,15 @@ struct CreateEventView: View {
     }
 }
 
-#Preview {
-    struct Preview: View {
-        @State var event = Event(name: "", description: "", locationDescription: "", startTimestamp: .init(date: Date()), endTimestamp: .init(date: Date()))
-        var body: some View {
-            CreateEventView(event: $event, isNewEvent: true)
-                .environment(CalendarViewModel())
-        }
-    }
-    
-    return Preview()
-    
-}
+//#Preview {
+//    struct Preview: View {
+//        @State var event = Event(name: "", description: "", locationDescription: "", startTimestamp: .init(date: Date()), endTimestamp: .init(date: Date()))
+//        var body: some View {
+//            CreateEventView(event: $event, isNewEvent: true)
+//                .environment(CalendarViewModel())
+//        }
+//    }
+//    
+//    return Preview()
+//    
+//}

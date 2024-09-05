@@ -10,17 +10,17 @@ import SwiftUI
 
 @main
 struct ClubConnectDemoApp: App {
-    @State private var calendarVM: CalendarViewModel
+    @StateObject private var calendarVM: CalendarViewModel = CalendarViewModel()
     
     init() {
         FirebaseApp.configure()
-        self.calendarVM = CalendarViewModel()
+//        self.calendarVM = CalendarViewModel()
     }
 
     var body: some Scene {
         WindowGroup {
             ContentView()
-                .environment(calendarVM)
+                .environmentObject(calendarVM)
         }
     }
 }

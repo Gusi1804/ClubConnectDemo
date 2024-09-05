@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ContentView: View {
     @State private var date = Date()
-    @Environment(CalendarViewModel.self) private var calendarVM
+    @EnvironmentObject private var calendarVM: CalendarViewModel
     @State private var createdEvent: Event = Event(name: "", description: "", locationDescription: "", startTimestamp: .init(date: Date()), endTimestamp: .init(date: Date()))
 
     @State private var presentingAddView = false
@@ -33,7 +33,7 @@ struct ContentView: View {
     }
 }
 
-#Preview {
-    ContentView()
-        .environment(CalendarViewModel())
-}
+//#Preview {
+//    ContentView()
+//        .environment(CalendarViewModel())
+//}

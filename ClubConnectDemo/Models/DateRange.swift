@@ -22,21 +22,30 @@ struct DateRange: Hashable {
     }
     
     init?(date: Date) {
-        // Get the current date
-        let currentDate = Date()
-
         // Create a calendar instance
         let calendar = Calendar.current
         
-        guard let range = calendar.range(of: .day, in: .month, for: currentDate) else {
+        guard let range = calendar.range(of: .day, in: .month, for: date) else {
             return nil
         }
         
-        self.start = calendar.date(from: calendar.dateComponents([.year, .month], from: currentDate))!
+        self.start = calendar.date(from: calendar.dateComponents([.year, .month], from: date))!
         self.end = calendar.date(byAdding: .day, value: range.count - 1, to: self.start)!
     }
     
     var debugDescription: String {
         "\(start) - \(end)"
+    }
+    
+    var extended: DateRange? {
+        let calendar = Calendar.current
+        guard let newStart = calendar.date(byAdding: DateComponents(month: -1), to: self.start) else { return nil }
+        guard let nextMonthStart = calendar.date(byAdding: DateComponents(month: 1), to: self.start) else { return nil }
+        guard let nextMonthRange = calendar.range(of: .day, in: .month, for: nextMonthStart) else {
+            return nil
+        }
+        guard let newEnd = calendar.date(byAdding: .day, value: nextMonthRange.count - 1, to: nextMonthStart) else { return nil }
+        
+        return DateRange(start: newStart, end: newEnd)
     }
 }

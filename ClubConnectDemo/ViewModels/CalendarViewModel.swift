@@ -8,13 +8,14 @@
 import FirebaseCore
 import FirebaseFirestore
 import Foundation
+import SwiftUI
 
-@Observable
-class CalendarViewModel {
-    var events: [DateRange: [Event]] = [:]
+//@Observable
+class CalendarViewModel: ObservableObject {
+    @Published var events: [DateRange: [Event]] = [:]
     private let calendar = Calendar.current
     private let db = Firestore.firestore()
-    private var lastUpdated: Date?
+    private var lastUpdated: [DateRange: Date] = [:]
     
     func fetchEvents(for dateRange: DateRange) async {
         let start = Timestamp(date: dateRange.start)
@@ -24,11 +25,11 @@ class CalendarViewModel {
         let eventsRef = db.collection("events")
         do {
             var eventsSnapshot: QuerySnapshot
-            if let lastUpdated {
+            if let lastUpdatedDate = lastUpdated[dateRange] {
                 eventsSnapshot = try await eventsRef
                     .whereField("startTimestamp", isGreaterThanOrEqualTo: start)
                     .whereField("startTimestamp", isLessThan: end)
-                    .whereField("lastModified", isGreaterThan: Timestamp(date: lastUpdated))
+                    .whereField("lastModified", isGreaterThan: Timestamp(date: lastUpdatedDate))
                     .getDocuments()
             } else {
                 eventsSnapshot = try await eventsRef
@@ -43,17 +44,21 @@ class CalendarViewModel {
                     var event = try document.data(as: Event.self)
                     event.id = document.documentID
                     events.append(event)
+                    guard let monthRange = DateRange(date: event.startDate) else {
+                        continue
+                    }
+                    await updateEvents(dateRange: monthRange, newEvent: event)
                 } catch let error {
                     print("Error decoding event: \(error)")
                 }
             }
-            lastUpdated = Date()
+            lastUpdated[dateRange] = Date()
         } catch {
             print("Error fetching events: \(error)")
         }
         
 //        self.events[dateRange] = events
-        updateEvents(dateRange: dateRange, newEvents: events)
+//        await updateEvents(dateRange: dateRange, newEvents: events)
     }
     
     func addEvent(_ event: Event) async {
@@ -97,22 +102,52 @@ class CalendarViewModel {
         }
     }
     
-    private func updateEvents(dateRange: DateRange, newEvents: [Event]) {
-        guard var currentEvents = events[dateRange] else {
+    @MainActor
+    private func updateEvents(dateRange: DateRange, newEvent: Event) {
+        guard let currentEvents = events[dateRange] else {
             // if we haven't fetched the current month ("dateRange"), set it in our dictionary
-            self.events[dateRange] = newEvents
+//            print("No event for \(dateRange.start.formatted(Date.FormatStyle())). Setting event.")
+            withAnimation(.snappy) {
+                self.events[dateRange] = [newEvent]
+            }
             return
         }
         
-        for event in newEvents {
-            if let index = currentEvents.firstIndex(where: { $0.id == event.id }) {
-                // if event already exists, update it
-                events[dateRange]?[index] = event
-            } else {
-                // if it's a new event, add it
-                events[dateRange]?.append(event)
+        if let index = currentEvents.firstIndex(where: { $0.id == newEvent.id }) {
+            // if event already exists, update it
+//            print("Event already exists. Updating...")
+            withAnimation(.snappy) {
+                events[dateRange]?[index] = newEvent
+            }
+        } else {
+            // if it's a new event, add it
+//            print("Event does not exist. Adding...")
+            withAnimation(.snappy) {
+                events[dateRange]?.append(newEvent)
             }
         }
+    }
+
+    // Helper to get all the events for a date
+    func eventsForDate(_ date: Date) -> [Event] {
+        guard let range = DateRange(date: date) else { return [] }
+        guard let eventsForMonth = events[range] else { return [] }
+        return eventsForMonth.filter {
+            isDateWithinWholeDay(dateToCheck: $0.startDate, referenceDate: date)
+        }
+    }
+    
+    // Function to check if a given date is within a specific day
+    private func isDateWithinWholeDay(dateToCheck: Date, referenceDate: Date) -> Bool {
+        let calendar = Calendar.current
         
+        // Get the start of the reference day (00:00:00)
+        let startOfDay = calendar.startOfDay(for: referenceDate)
+        
+        // Get the end of the reference day (23:59:59)
+        let endOfDay = calendar.date(byAdding: DateComponents(day: 1, second: -1), to: startOfDay)!
+        
+        // Check if the given date falls between start and end of the day
+        return dateToCheck >= startOfDay && dateToCheck <= endOfDay
     }
 }

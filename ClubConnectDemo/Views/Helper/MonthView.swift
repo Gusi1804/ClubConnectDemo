@@ -10,7 +10,7 @@ import SwiftUI
 struct MonthView: View {
     // Current date and calendar
     @Binding var date: Date
-    @Environment(CalendarViewModel.self) private var calendarVM
+    @EnvironmentObject private var calendarVM: CalendarViewModel
     @State private var selectedDate: Date?
     
     private var calendar = Calendar.current
@@ -37,9 +37,10 @@ struct MonthView: View {
             calendarGrid
                 .padding(.horizontal)
                 .animation(defaultAnimation, value: date)
+//                .animation(.snappy, value: calendarVM.events)
             
             if let selectedDate {
-                EventsForDayView(date: selectedDate, events: eventsForDate(selectedDate))
+                EventsForDayView(date: selectedDate, events: calendarVM.eventsForDate(selectedDate))
                     .animation(defaultAnimation, value: selectedDate)
             } else {
                 Spacer()
@@ -107,7 +108,7 @@ struct MonthView: View {
     
     @ViewBuilder
     private func dayNumberView(_ date: Date) -> some View {
-        if eventsForDate(date).count > 0 {
+        if calendarVM.eventsForDate(date).count > 0 {
             Button(action: {
                 withAnimation(defaultAnimation) {
                     selectedDate = date
@@ -148,38 +149,29 @@ struct MonthView: View {
         return dateFormatter.string(from: date)
     }
     
-    // Helper to get all the events for a date
-    private func eventsForDate(_ date: Date) -> [Event] {
-        guard let range = DateRange(date: Date()) else { return [] }
-        guard let eventsForMonth = calendarVM.events[range] else { return [] }
-        return eventsForMonth.filter {
-            isDateWithinWholeDay(dateToCheck: $0.startDate, referenceDate: date)
-        }
-    }
-    
-    // Function to check if a given date is within a specific day
-    private func isDateWithinWholeDay(dateToCheck: Date, referenceDate: Date) -> Bool {
-        let calendar = Calendar.current
-        
-        // Get the start of the reference day (00:00:00)
-        let startOfDay = calendar.startOfDay(for: referenceDate)
-        
-        // Get the end of the reference day (23:59:59)
-        let endOfDay = calendar.date(byAdding: DateComponents(day: 1, second: -1), to: startOfDay)!
-        
-        // Check if the given date falls between start and end of the day
-        return dateToCheck >= startOfDay && dateToCheck <= endOfDay
-    }
-    
      func fetchEvents() async {
-        guard let dateRange = DateRange(date: $date.wrappedValue) else {
-            return
-        }
-        await calendarVM.fetchEvents(for: dateRange)
+         guard let dateRange = DateRange(date: date) else {
+             return
+         }
+//         print("Fetching events for \(dateRange)")
+         await calendarVM.fetchEvents(for: dateRange)
+         
+         let calendar = Calendar.current
+         guard let nextMonthStartDate = calendar.date(byAdding: DateComponents(month: 1), to: date),
+               let nextMonthRange = DateRange(date: nextMonthStartDate)
+         else { return }
+//         print("Fetching events for \(nextMonthRange)")
+         await calendarVM.fetchEvents(for: nextMonthRange)
+         
+         guard let prevMonthStartDate = calendar.date(byAdding: DateComponents(month: -1), to: date),
+               let prevMonthRange = DateRange(date: prevMonthStartDate)
+         else { return }
+//         print("Fetching events for \(prevMonthRange)")
+         await calendarVM.fetchEvents(for: prevMonthRange)
     }
 }
-
-#Preview {
-    MonthView(date: .constant(Date()))
-        .environment(CalendarViewModel())
-}
+//
+//#Preview {
+//    MonthView(date: .constant(Date()))
+//        .environment(CalendarViewModel())
+//}
