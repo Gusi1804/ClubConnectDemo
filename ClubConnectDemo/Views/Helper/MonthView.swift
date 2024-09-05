@@ -170,8 +170,8 @@ struct MonthView: View {
          await calendarVM.fetchEvents(for: prevMonthRange)
     }
 }
-//
-//#Preview {
-//    MonthView(date: .constant(Date()))
-//        .environment(CalendarViewModel())
-//}
+
+#Preview {
+    MonthView(date: .constant(Date()))
+        .environmentObject(CalendarViewModel())
+}

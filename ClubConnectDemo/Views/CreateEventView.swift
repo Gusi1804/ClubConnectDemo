@@ -47,15 +47,15 @@ struct CreateEventView: View {
     }
 }
 
-//#Preview {
-//    struct Preview: View {
-//        @State var event = Event(name: "", description: "", locationDescription: "", startTimestamp: .init(date: Date()), endTimestamp: .init(date: Date()))
-//        var body: some View {
-//            CreateEventView(event: $event, isNewEvent: true)
-//                .environment(CalendarViewModel())
-//        }
-//    }
-//    
-//    return Preview()
-//    
-//}
+#Preview {
+    struct Preview: View {
+        @State var event = Event(name: "", description: "", locationDescription: "", startTimestamp: .init(date: Date()), endTimestamp: .init(date: Date()))
+        var body: some View {
+            CreateEventView(event: $event, isNewEvent: true)
+                .environmentObject(CalendarViewModel())
+        }
+    }
+    
+    return Preview()
+    
+}

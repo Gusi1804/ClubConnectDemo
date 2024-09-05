@@ -33,7 +33,7 @@ struct ContentView: View {
     }
 }
 
-//#Preview {
-//    ContentView()
-//        .environment(CalendarViewModel())
-//}
+#Preview {
+    ContentView()
+        .environmentObject(CalendarViewModel())
+}
