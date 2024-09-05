@@ -9,13 +9,14 @@ import Foundation
 import FirebaseCore
 import FirebaseFirestore
 
-struct Event: Identifiable, Codable {
+struct Event: Identifiable, Codable, Equatable {
     var id: String = UUID().uuidString
-    let name: String
-    let description: String
-    let locationDescription: String
-    let startTimestamp: Timestamp
-    let endTimestamp: Timestamp
+    var name: String
+    var description: String
+    var locationDescription: String
+    var startTimestamp: Timestamp
+    var endTimestamp: Timestamp
+    var lastModified: Timestamp
     
     enum CodingKeys: String, CodingKey {
         case name
@@ -23,13 +24,37 @@ struct Event: Identifiable, Codable {
         case locationDescription
         case startTimestamp
         case endTimestamp
+        case lastModified
     }
     
     var startDate: Date {
-        startTimestamp.dateValue()
+        get {
+            startTimestamp.dateValue()
+        }
+        set {
+            startTimestamp = .init(date: newValue)
+        }
     }
     
     var endDate: Date {
-        endTimestamp.dateValue()
+        get {
+            endTimestamp.dateValue()
+        }
+        set {
+            endTimestamp = .init(date: newValue)
+        }
+    }
+    
+    init(name: String, description: String, locationDescription: String, startTimestamp: Timestamp, endTimestamp: Timestamp, lastModified: Timestamp? = nil) {
+        self.name = name
+        self.description = description
+        self.locationDescription = locationDescription
+        self.startTimestamp = startTimestamp
+        self.endTimestamp = endTimestamp
+        if let lastModified {
+            self.lastModified = lastModified
+        } else {
+            self.lastModified = .init(date: Date())
+        }
     }
 }

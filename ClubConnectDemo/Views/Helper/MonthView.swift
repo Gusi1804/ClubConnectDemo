@@ -171,7 +171,7 @@ struct MonthView: View {
         return dateToCheck >= startOfDay && dateToCheck <= endOfDay
     }
     
-    private func fetchEvents() async {
+     func fetchEvents() async {
         guard let dateRange = DateRange(date: $date.wrappedValue) else {
             return
         }

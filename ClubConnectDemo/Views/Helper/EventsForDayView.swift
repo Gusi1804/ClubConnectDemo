@@ -9,7 +9,7 @@ import SwiftUI
 
 struct EventsForDayView: View {
     let date: Date
-    let events: [Event]
+    var events: [Event]
     
     var body: some View {
         VStack(alignment: .leading) {

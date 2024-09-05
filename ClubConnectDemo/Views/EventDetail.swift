@@ -10,8 +10,9 @@ import FirebaseFirestore
 import SwiftUI
 
 struct EventDetail: View {
-    private var event: Event
-    
+    @State private var event: Event
+    @State private var presentingEditView = false
+
     init(_ event: Event) {
         self.event = event
     }
@@ -42,6 +43,17 @@ struct EventDetail: View {
         }
         .padding()
         .navigationTitle(event.name)
+        .toolbar {
+            ToolbarItem(placement: .topBarTrailing) {
+                Button("\(Image(systemName: "pencil")) Edit Event") {
+                    presentingEditView = true
+                }
+            }
+        }
+    
+        NavigationLink(destination: CreateEventView(event: $event, isNewEvent: false), isActive: $presentingEditView) {
+            EmptyView()
+        }
     }
     
     private var formattedDurationString: String {
