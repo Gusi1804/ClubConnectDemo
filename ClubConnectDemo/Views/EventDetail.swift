@@ -37,7 +37,7 @@ struct EventDetail: View {
             Text("\(Image(systemName: "location")) \(event.locationDescription)")
                 .padding(.bottom, 5)
             
-            Text(event.description)
+            Text(event.descriptionString)
             
             Spacer()
         }

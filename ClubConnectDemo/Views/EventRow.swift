@@ -23,7 +23,7 @@ struct EventRow: View {
                     .font(.callout).bold()
                 Text("\(Image(systemName: "location")) \(event.locationDescription)")
                     .font(.caption).bold()
-                Text(event.description)
+                Text(event.descriptionString)
                     .lineLimit(3)
                     .font(.caption)
                 

@@ -9,7 +9,7 @@ import SwiftUI
 
 struct CreateEventView: View {
     @Environment(\.dismiss) var dismiss
-    @EnvironmentObject private var calendarVM: CalendarViewModel
+    @Environment(CalendarViewModel.self) private var calendarVM
 
     @Binding var event: Event
     @State private var startDate: Date = Date()
@@ -20,7 +20,7 @@ struct CreateEventView: View {
         Form {
             TextField("Event Name", text: $event.name)
             TextField("Event Location", text: $event.locationDescription)
-            TextField("Event Description", text: $event.description, axis: .vertical)
+            TextField("Event Description", text: $event.descriptionString, axis: .vertical)
                 .lineLimit(5...10)
             DatePicker("Start Date", selection: $event.startDate)
             DatePicker("End Date", selection: $event.endDate)
@@ -52,7 +52,7 @@ struct CreateEventView: View {
         @State var event = Event(name: "", description: "", locationDescription: "", startTimestamp: .init(date: Date()), endTimestamp: .init(date: Date()))
         var body: some View {
             CreateEventView(event: $event, isNewEvent: true)
-                .environmentObject(CalendarViewModel())
+                .environment(CalendarViewModel())
         }
     }
     

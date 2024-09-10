@@ -10,8 +10,9 @@ import FirebaseFirestore
 import Foundation
 import SwiftUI
 
-class CalendarViewModel: ObservableObject {
-    @Published var events: [DateRange: [Event]] = [:]
+@Observable
+class CalendarViewModel {
+    var events: [DateRange: [Event]] = [:]
     private let calendar = Calendar.current
     private let db = Firestore.firestore()
     private var lastUpdated: [DateRange: Date] = [:]

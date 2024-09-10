@@ -10,7 +10,7 @@ import SwiftUI
 struct MonthView: View {
     // Current date and calendar
     @Binding var date: Date
-    @EnvironmentObject private var calendarVM: CalendarViewModel
+    @Environment(CalendarViewModel.self) private var calendarVM
     @State private var selectedDate: Date?
     
     private var calendar = Calendar.current
@@ -173,5 +173,5 @@ struct MonthView: View {
 
 #Preview {
     MonthView(date: .constant(Date()))
-        .environmentObject(CalendarViewModel())
+        .environment(CalendarViewModel())
 }
