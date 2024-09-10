@@ -10,7 +10,7 @@ import SwiftUI
 struct ContentView: View {
     @State private var date = Date()
     @Environment(CalendarViewModel.self) private var calendarVM
-    @State private var createdEvent: Event = Event(name: "", description: "", locationDescription: "", startTimestamp: .init(date: Date()), endTimestamp: .init(date: Date()))
+    @State private var createdEvent: Event = Event(id: "", name: "", description: "", locationDescription: "", startTimestamp: .init(date: Date()), endTimestamp: .init(date: Date()))
 
     @State private var presentingAddView = false
     

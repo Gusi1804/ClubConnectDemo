@@ -29,18 +29,21 @@ extension Event {
     }
     
     static let example1: Event = Event(
+        id: UUID().uuidString,
         name: "First Meeting of ClubConnect",
         description: "This is a sample event for previews.",
         locationDescription: "Pettit Conference 102B",
         startTimestamp: Timestamp(date: Date(firebaseString: "September 3, 2024 at 5:00:00 PM UTC-4") ?? Date()),
         endTimestamp: Timestamp(date: Date(firebaseString: "September 3, 2024 at 6:00:00 PM UTC-4") ?? Date()))
     static let example2: Event = Event(
+        id: UUID().uuidString,
         name: "Second Meeting of ClubConnect",
         description: "This is a very long description for the second club meeting for ClubConnect. We will be covering the second part of the demo, in particular navigation and Firebase.",
         locationDescription: "Pettit Conference 102B",
         startTimestamp: Timestamp(date: Date(firebaseString: "September 5, 2024 at 5:00:00 PM UTC-4") ?? Date()),
         endTimestamp: Timestamp(date: Date(firebaseString: "September 5, 2024 at 6:00:00 PM UTC-4") ?? Date()))
     static let example3: Event = Event(
+        id: UUID().uuidString,
         name: "Another Event",
         description: "This is another event after our meeting",
         locationDescription: "CCB 016",

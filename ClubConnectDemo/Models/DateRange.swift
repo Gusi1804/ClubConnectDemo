@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct DateRange: Hashable {
+struct DateRange: Hashable, Codable {
     let start: Date
     let end: Date
     

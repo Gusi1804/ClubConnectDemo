@@ -8,6 +8,7 @@
 import FirebaseCore
 import FirebaseFirestore
 import Foundation
+import SwiftData
 import SwiftUI
 
 @Observable
@@ -15,9 +16,14 @@ class CalendarViewModel {
     var events: [DateRange: [Event]] = [:]
     private let calendar = Calendar.current
     private let db = Firestore.firestore()
-    private var lastUpdated: [DateRange: Date] = [:]
+
+    private let container: ModelContainer
+    init(container: ModelContainer = try! ModelContainer(for: Event.self)) {
+        self.container = container
+    }
     
     func fetchEvents(for dateRange: DateRange) async {
+        await populateEvents(for: dateRange)
         let start = Timestamp(date: dateRange.start)
         let end = Timestamp(date: dateRange.end)
                 
@@ -25,7 +31,7 @@ class CalendarViewModel {
         let eventsRef = db.collection("events")
         do {
             var eventsSnapshot: QuerySnapshot
-            if let lastUpdatedDate = lastUpdated[dateRange] {
+            if let lastUpdatedDate = lastUpdated(for: dateRange) {
                 eventsSnapshot = try await eventsRef
                     .whereField("startTimestamp", isGreaterThanOrEqualTo: start)
                     .whereField("startTimestamp", isLessThan: end)
@@ -41,9 +47,11 @@ class CalendarViewModel {
                 // Try to decode the document data into the Event struct
                 print("FETCHING: \(document.documentID)")
                 do {
-                    var event = try document.data(as: Event.self)
-                    event.id = document.documentID
+                    var firebaseEvent = try document.data(as: FirebaseEvent.self)
+                    firebaseEvent.id = document.documentID
+                    let event = firebaseEvent.event
                     events.append(event)
+                    await saveEvent(event)
                     guard let monthRange = DateRange(date: event.startDate) else {
                         continue
                     }
@@ -52,19 +60,17 @@ class CalendarViewModel {
                     print("Error decoding event: \(error)")
                 }
             }
-            lastUpdated[dateRange] = Date()
+            updateLastUpdated(for: dateRange, lastUpdated: Date())
         } catch {
             print("Error fetching events: \(error)")
         }
-        
-//        self.events[dateRange] = events
-//        await updateEvents(dateRange: dateRange, newEvents: events)
     }
     
     func addEvent(_ event: Event) async {
         var newEvent: DocumentReference
         do {
-            newEvent = try db.collection("events").addDocument(from: event)
+            let firebaseEvent = event.firebaseEvent
+            newEvent = try db.collection("events").addDocument(from: firebaseEvent)
             guard let dateRange = DateRange(date: event.startDate), var events = events[dateRange] else {
                 return
             }
@@ -86,7 +92,8 @@ class CalendarViewModel {
     
     func updateEvent(_ event: Event) async {
         do {
-            try db.collection("events").document(event.id).setData(from: event)
+            let firebaseEvent = event.firebaseEvent
+            try db.collection("events").document(event.id).setData(from: firebaseEvent)
             print("Event successfully updated")
         } catch {
             print("Error updating event: \(error)")
@@ -149,5 +156,43 @@ class CalendarViewModel {
         
         // Check if the given date falls between start and end of the day
         return dateToCheck >= startOfDay && dateToCheck <= endOfDay
+    }
+    
+    private func lastUpdated(for dateRange: DateRange) -> Date? {
+        let defaults = UserDefaults.standard
+        return defaults.object(forKey: dateRange.debugDescription) as? Date
+    }
+    
+    private func updateLastUpdated(for dateRange: DateRange, lastUpdated: Date) {
+        let defaults = UserDefaults.standard
+        defaults.set(lastUpdated, forKey: dateRange.debugDescription)
+    }
+    
+    @MainActor
+    private func populateEvents(for dateRange: DateRange) async {
+        let context = container.mainContext
+        let eventsDescriptor = FetchDescriptor<Event>(
+            predicate: #Predicate {
+                $0.startDate >= dateRange.start && $0.startDate <= dateRange.end
+            },
+            sortBy: [
+                .init(\.startDate)
+            ]
+        )
+        
+        if let results = try? context.fetch(eventsDescriptor) {
+            for event in results {
+                guard let monthRange = DateRange(date: event.startDate) else {
+                    continue
+                }
+                updateEvents(dateRange: monthRange, newEvent: event)
+            }
+        }
+    }
+    
+    @MainActor
+    private func saveEvent(_ event: Event) async {
+        let context = container.mainContext
+        context.insert(event)
     }
 }
