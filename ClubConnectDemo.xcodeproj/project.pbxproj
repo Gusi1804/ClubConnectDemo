@@ -11,19 +11,41 @@
 		CA9635912C8807D200D6E25F /* FirebaseAuthCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = CA9635902C8807D200D6E25F /* FirebaseAuthCombine-Community */; };
 		CA9635932C8807D200D6E25F /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = CA9635922C8807D200D6E25F /* FirebaseFirestore */; };
 		CA9635952C8807D200D6E25F /* FirebaseFirestoreCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = CA9635942C8807D200D6E25F /* FirebaseFirestoreCombine-Community */; };
+		CAC3B27D2C90F5D700ABF15B /* Date+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAC3B2672C90F5D700ABF15B /* Date+Extensions.swift */; };
+		CAC3B27E2C90F5D700ABF15B /* Event+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAC3B2682C90F5D700ABF15B /* Event+Extensions.swift */; };
+		CAC3B27F2C90F5D700ABF15B /* DateRange.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAC3B26A2C90F5D700ABF15B /* DateRange.swift */; };
+		CAC3B2802C90F5D700ABF15B /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAC3B26B2C90F5D700ABF15B /* Event.swift */; };
+		CAC3B2812C90F5D700ABF15B /* CalendarViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAC3B26F2C90F5D700ABF15B /* CalendarViewModel.swift */; };
+		CAC3B2822C90F5D700ABF15B /* EventsForDayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAC3B2712C90F5D700ABF15B /* EventsForDayView.swift */; };
+		CAC3B2832C90F5D700ABF15B /* MonthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAC3B2722C90F5D700ABF15B /* MonthView.swift */; };
+		CAC3B2842C90F5D700ABF15B /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAC3B2742C90F5D700ABF15B /* ContentView.swift */; };
+		CAC3B2852C90F5D700ABF15B /* CreateEventView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAC3B2752C90F5D700ABF15B /* CreateEventView.swift */; };
+		CAC3B2862C90F5D700ABF15B /* EventDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAC3B2762C90F5D700ABF15B /* EventDetail.swift */; };
+		CAC3B2872C90F5D700ABF15B /* EventRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAC3B2772C90F5D700ABF15B /* EventRow.swift */; };
+		CAC3B2882C90F5D700ABF15B /* ClubConnectDemoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAC3B27A2C90F5D700ABF15B /* ClubConnectDemoApp.swift */; };
+		CAC3B2892C90F5D700ABF15B /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CAC3B26D2C90F5D700ABF15B /* Preview Assets.xcassets */; };
+		CAC3B28A2C90F5D700ABF15B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CAC3B2792C90F5D700ABF15B /* Assets.xcassets */; };
+		CAC3B28B2C90F5D700ABF15B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CAC3B27B2C90F5D700ABF15B /* GoogleService-Info.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		CA96357A2C88075000D6E25F /* ClubConnectDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ClubConnectDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		CAC3B2672C90F5D700ABF15B /* Date+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extensions.swift"; sourceTree = "<group>"; };
+		CAC3B2682C90F5D700ABF15B /* Event+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Event+Extensions.swift"; sourceTree = "<group>"; };
+		CAC3B26A2C90F5D700ABF15B /* DateRange.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateRange.swift; sourceTree = "<group>"; };
+		CAC3B26B2C90F5D700ABF15B /* Event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
+		CAC3B26D2C90F5D700ABF15B /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		CAC3B26F2C90F5D700ABF15B /* CalendarViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewModel.swift; sourceTree = "<group>"; };
+		CAC3B2712C90F5D700ABF15B /* EventsForDayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsForDayView.swift; sourceTree = "<group>"; };
+		CAC3B2722C90F5D700ABF15B /* MonthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthView.swift; sourceTree = "<group>"; };
+		CAC3B2742C90F5D700ABF15B /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		CAC3B2752C90F5D700ABF15B /* CreateEventView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateEventView.swift; sourceTree = "<group>"; };
+		CAC3B2762C90F5D700ABF15B /* EventDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventDetail.swift; sourceTree = "<group>"; };
+		CAC3B2772C90F5D700ABF15B /* EventRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventRow.swift; sourceTree = "<group>"; };
+		CAC3B2792C90F5D700ABF15B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		CAC3B27A2C90F5D700ABF15B /* ClubConnectDemoApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClubConnectDemoApp.swift; sourceTree = "<group>"; };
+		CAC3B27B2C90F5D700ABF15B /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
-
-/* Begin PBXFileSystemSynchronizedRootGroup section */
-		CA96357C2C88075000D6E25F /* ClubConnectDemo */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			path = ClubConnectDemo;
-			sourceTree = "<group>";
-		};
-/* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		CA9635772C88075000D6E25F /* Frameworks */ = {
@@ -43,7 +65,7 @@
 		CA9635712C88075000D6E25F = {
 			isa = PBXGroup;
 			children = (
-				CA96357C2C88075000D6E25F /* ClubConnectDemo */,
+				CAC3B27C2C90F5D700ABF15B /* ClubConnectDemo */,
 				CA96357B2C88075000D6E25F /* Products */,
 			);
 			sourceTree = "<group>";
@@ -54,6 +76,76 @@
 				CA96357A2C88075000D6E25F /* ClubConnectDemo.app */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		CAC3B2692C90F5D700ABF15B /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				CAC3B2672C90F5D700ABF15B /* Date+Extensions.swift */,
+				CAC3B2682C90F5D700ABF15B /* Event+Extensions.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		CAC3B26C2C90F5D700ABF15B /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				CAC3B26A2C90F5D700ABF15B /* DateRange.swift */,
+				CAC3B26B2C90F5D700ABF15B /* Event.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		CAC3B26E2C90F5D700ABF15B /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				CAC3B26D2C90F5D700ABF15B /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		CAC3B2702C90F5D700ABF15B /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				CAC3B26F2C90F5D700ABF15B /* CalendarViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		CAC3B2732C90F5D700ABF15B /* Helper */ = {
+			isa = PBXGroup;
+			children = (
+				CAC3B2712C90F5D700ABF15B /* EventsForDayView.swift */,
+				CAC3B2722C90F5D700ABF15B /* MonthView.swift */,
+			);
+			path = Helper;
+			sourceTree = "<group>";
+		};
+		CAC3B2782C90F5D700ABF15B /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				CAC3B2732C90F5D700ABF15B /* Helper */,
+				CAC3B2742C90F5D700ABF15B /* ContentView.swift */,
+				CAC3B2752C90F5D700ABF15B /* CreateEventView.swift */,
+				CAC3B2762C90F5D700ABF15B /* EventDetail.swift */,
+				CAC3B2772C90F5D700ABF15B /* EventRow.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		CAC3B27C2C90F5D700ABF15B /* ClubConnectDemo */ = {
+			isa = PBXGroup;
+			children = (
+				CAC3B2692C90F5D700ABF15B /* Helpers */,
+				CAC3B26C2C90F5D700ABF15B /* Models */,
+				CAC3B26E2C90F5D700ABF15B /* Preview Content */,
+				CAC3B2702C90F5D700ABF15B /* ViewModels */,
+				CAC3B2782C90F5D700ABF15B /* Views */,
+				CAC3B2792C90F5D700ABF15B /* Assets.xcassets */,
+				CAC3B27A2C90F5D700ABF15B /* ClubConnectDemoApp.swift */,
+				CAC3B27B2C90F5D700ABF15B /* GoogleService-Info.plist */,
+			);
+			path = ClubConnectDemo;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -70,9 +162,6 @@
 			buildRules = (
 			);
 			dependencies = (
-			);
-			fileSystemSynchronizedGroups = (
-				CA96357C2C88075000D6E25F /* ClubConnectDemo */,
 			);
 			name = ClubConnectDemo;
 			packageProductDependencies = (
@@ -127,6 +216,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CAC3B2892C90F5D700ABF15B /* Preview Assets.xcassets in Resources */,
+				CAC3B28A2C90F5D700ABF15B /* Assets.xcassets in Resources */,
+				CAC3B28B2C90F5D700ABF15B /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -137,6 +229,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CAC3B27D2C90F5D700ABF15B /* Date+Extensions.swift in Sources */,
+				CAC3B27E2C90F5D700ABF15B /* Event+Extensions.swift in Sources */,
+				CAC3B27F2C90F5D700ABF15B /* DateRange.swift in Sources */,
+				CAC3B2802C90F5D700ABF15B /* Event.swift in Sources */,
+				CAC3B2812C90F5D700ABF15B /* CalendarViewModel.swift in Sources */,
+				CAC3B2822C90F5D700ABF15B /* EventsForDayView.swift in Sources */,
+				CAC3B2832C90F5D700ABF15B /* MonthView.swift in Sources */,
+				CAC3B2842C90F5D700ABF15B /* ContentView.swift in Sources */,
+				CAC3B2852C90F5D700ABF15B /* CreateEventView.swift in Sources */,
+				CAC3B2862C90F5D700ABF15B /* EventDetail.swift in Sources */,
+				CAC3B2872C90F5D700ABF15B /* EventRow.swift in Sources */,
+				CAC3B2882C90F5D700ABF15B /* ClubConnectDemoApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
