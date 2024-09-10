@@ -159,13 +159,23 @@ class CalendarViewModel {
     }
     
     private func lastUpdated(for dateRange: DateRange) -> Date? {
-        let defaults = UserDefaults.standard
-        return defaults.object(forKey: dateRange.debugDescription) as? Date
+        if isPreview {
+            return nil
+        } else {
+            let defaults = UserDefaults.standard
+            return defaults.object(forKey: dateRange.debugDescription) as? Date
+        }
     }
     
     private func updateLastUpdated(for dateRange: DateRange, lastUpdated: Date) {
-        let defaults = UserDefaults.standard
-        defaults.set(lastUpdated, forKey: dateRange.debugDescription)
+        if !isPreview {
+            let defaults = UserDefaults.standard
+            defaults.set(lastUpdated, forKey: dateRange.debugDescription)
+        }
+    }
+    
+    private var isPreview: Bool {
+        return ProcessInfo.processInfo.environment["XCODE_RUNNING_FOR_PREVIEWS"] == "1"
     }
     
     @MainActor
