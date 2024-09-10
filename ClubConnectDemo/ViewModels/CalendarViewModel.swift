@@ -14,6 +14,7 @@ import SwiftUI
 @Observable
 class CalendarViewModel {
     var events: [DateRange: [Event]] = [:]
+    var reads: Int = 0
     private let calendar = Calendar.current
     private let db = Firestore.firestore()
 
@@ -46,6 +47,7 @@ class CalendarViewModel {
             for document in eventsSnapshot.documents {
                 // Try to decode the document data into the Event struct
                 print("FETCHING: \(document.documentID)")
+                reads += 1
                 do {
                     var firebaseEvent = try document.data(as: FirebaseEvent.self)
                     firebaseEvent.id = document.documentID

@@ -24,6 +24,9 @@ struct ContentView: View {
                             presentingAddView = true
                         }
                     }
+                    ToolbarItem(placement: .topBarLeading) {
+                        Text("\(calendarVM.reads) read(s)")
+                    }
                 }
             
             NavigationLink(destination: CreateEventView(event: $createdEvent, isNewEvent: true), isActive: $presentingAddView) {
