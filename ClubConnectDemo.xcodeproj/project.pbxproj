@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 77;
+	objectVersion = 63;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -190,6 +190,7 @@
 				};
 			};
 			buildConfigurationList = CA9635752C88075000D6E25F /* Build configuration list for PBXProject "ClubConnectDemo" */;
+			compatibilityVersion = "Xcode 15.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -201,7 +202,6 @@
 			packageReferences = (
 				CA96358D2C8807D200D6E25F /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 			);
-			preferredProjectObjectVersion = 77;
 			productRefGroup = CA96357B2C88075000D6E25F /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
